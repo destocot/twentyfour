@@ -18,7 +18,7 @@ const randomNumbers = [
 
 function App() {
   const [game, setGame] = useState(false);
-  const [attempt, setAttempt] = useState("__");
+  const [attempt, setAttempt] = useState("");
   const [numbers, setNumbers] = useState(randomNumbers);
   const [cards, setCards] = useState(true);
   const [query, setQuery] = useState("");
@@ -53,7 +53,7 @@ function App() {
       setTimeout(() => {
         setCards(false);
         newNumbers();
-        setAttempt("__");
+        setAttempt("");
         setStreak((state) => state + 1);
         setCards(true);
       }, 2000);
@@ -137,7 +137,7 @@ function App() {
                 setCards(false);
                 newNumbers();
                 setQuery("");
-                setAttempt("__");
+                setAttempt("");
                 setTimeout(() => {
                   setCards(true);
                 }, 1);
