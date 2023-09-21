@@ -1,4 +1,4 @@
-import { FormEvent, useState } from "react";
+import { useState } from "react";
 import "./App.css";
 import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
@@ -30,6 +30,7 @@ function App() {
     const num3 = Math.floor(Math.random() * (9 - 1) + 1);
     const num4 = Math.floor(Math.random() * (9 - 1) + 1);
     setNumbers([num1, num2, num3, num4]);
+    // setNumbers([1, 1, 8, 1]);
   };
 
   const submitHandler = (e) => {
@@ -153,7 +154,8 @@ function App() {
               <Card.Text>
                 Using, the numbers above, use math operations to make the number
                 24, you must use each number and only once. The only operations
-                you can use are '+', '-', '*', and '/'.
+                you can use are &apos;+&apos;, &apos;-&apos;, &apos;*&apos;, and
+                &apos;/&apos;.
               </Card.Text>
               <Card.Text>
                 Some numbers may have multiple solutions, while others might

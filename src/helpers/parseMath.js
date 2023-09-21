@@ -1,3 +1,5 @@
+// CANNOT HANDLE 8 * (1 + 1 + 1)
+
 const extraneousParens = (array) => {
   let extraneous = true;
   while (extraneous) {
@@ -13,7 +15,6 @@ const extraneousParens = (array) => {
   }
   return array;
 }
-
 
 export const parseMath = (string) => {
 
@@ -43,7 +44,9 @@ export const evaluateMath = (array) => {
   let result = null;
   let a, b, operation;
 
+  // console.log('1', array);
   array = dealWithParenthesis(array);
+  // console.log('2', array);
 
   while (array.length > 1) {
     let revolvingIndex = 1;
@@ -103,12 +106,24 @@ const checkInner = (array, paren1Index) => {
 };
 
 const reduceArray = (array, parenStart) => {
-  const res = calculate(
-    array[parenStart + 1],
-    array[parenStart + 3],
-    array[parenStart + 2]
-  );
-  return array.slice(0, parenStart).concat(res).concat(array.slice(parenStart + 5));
+  if (array[parenStart] === '(' && array[parenStart + 4] === ')') {
+    const res = calculate(
+      array[parenStart + 1],
+      array[parenStart + 3],
+      array[parenStart + 2]
+    );
+    return array.slice(0, parenStart).concat(res).concat(array.slice(parenStart + 5));
+  } else {
+    let endParenIdx = parenStart + 4;
+    for (let i = parenStart; i < array.length; i++) {
+      if (array[i] === ")") {
+        endParenIdx = i;
+        break;
+      }
+    }
+    const toEval = evaluateMath(array.slice(parenStart + 1, endParenIdx));
+    return array.slice(0, parenStart).concat(toEval).concat(array.slice(endParenIdx + 1));
+  }
 };
 
 const calculate = (num1, num2, operation) => {
